@@ -111,7 +111,18 @@ buttonAddCart.addEventListener('click', () => {
     closeModal();
 });
 
+q('.menu-openner').addEventListener('click', () => {
+    q('aside').style.left = '0';
+})
+
+q('.menu-closer').addEventListener('click', () => {
+    q('aside').style.left = '100vw';
+})
+
 function updateCart() {
+    let menuMobile = document.querySelector('.menu-openner');
+    menuMobile.querySelector('span').innerHTML = cart.length;
+
     if (cart.length > 0) {
         let pizzaItem = '';
         q('.cart').innerHTML = '';
@@ -123,7 +134,6 @@ function updateCart() {
         for (let i in cart) {
             pizzaItem = pizzaJson.find(item => item.id == cart[i].id);
             subtotal += pizzaItem.price * cart[i].qtd;
-            console.log(subtotal);
 
             let pizzaCartItem = document.querySelector('.cart--item').cloneNode(true);
             let pizzaSizeName;
@@ -174,5 +184,6 @@ function updateCart() {
         cartArea.querySelector('.total span:last-child').innerHTML = `R$ ${total.toFixed(2)}`;
     } else {
         q('aside').classList.remove('show');
+        q('aside').style.left = '100vh';
     }
 };
