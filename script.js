@@ -1,31 +1,15 @@
-import { pizzaJson } from "./pizzas.js";
+const q = (el) => document.querySelector(el);
+const qa = (el) => document.querySelectorAll(el);
 
-function showPizza(){
-    const pizzaArea = document.querySelector('.pizza-area');
+pizzaJson.map((item, index) => {
+    let pizzaItem = q('.models .pizza-item').cloneNode(true);
+    let pizzaArea = q('.pizza-area');
 
-    let pizzaItemElement = document.createElement('div');
-    pizzaItemElement.classList.add('pizza-item')
-
-    let aElement = document.createElement('a');
-    let pizzaImgElement = document.createElement('div');
-
-
-    
-
-    console.log(pizzaJson)
-
-    pizzaJson.forEach((pizza, index) => {
-        pizzaArea.appendChild(createDiv('pizza-item'));
-    })
-    
-}
-
-function createPizza(classeDiv, classeDivImg, classeDivAdd){
-    const div = document.createElement('div');
-    div.classList.add(classeDiv);
+    pizzaItem.querySelector('.pizza-item--name').innerHTML = item.name
+    pizzaItem.querySelector('.pizza-item--price').innerHTML = `R$ ${item.price.toFixed(2)}`
+    pizzaItem.querySelector('.pizza-item--desc').innerHTML = item.description
+    pizzaItem.querySelector('.pizza-item--img img').src = item.img;
 
 
-    return div;
-}
-
-showPizza();
+    pizzaArea.append(pizzaItem)
+});
